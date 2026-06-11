@@ -1,0 +1,769 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+
+/* ==========================================================================
+   --- 1. CENTRAL VARIABLE CONFIGURATION & THEME REGISTRIES ---
+   ========================================================================== */
+:root,
+body[data-theme="dark"] {
+    /* Baseline Canvases - Sourced from a darkened mix of your signature maroon */
+    --bg-canvas: #0f0305;
+    --bg-surface: rgba(36, 10, 16, 0.6);
+    --bg-surface-solid: #1d070b;
+    --bg-sidebar: rgba(22, 5, 9, 0.96);
+    --border-subtle: rgba(211, 97, 53, 0.15);
+    /* Tinted with your secondary orange */
+
+    /* Typography Matrix */
+    --text-main: #fcfaf7;
+    /* Off-white cream text */
+    --text-muted: #a39092;
+
+    /* Brand Accent Alignment */
+    --primary-accent: #d36135;
+    /* Your signature burnt orange pop */
+    --primary-accent-glow: rgba(211, 97, 53, 0.15);
+    --secondary-pop: #6b1426;
+    /* Your primary royal maroon accent */
+    --card-shadow: 0 12px 40px rgba(0, 0, 0, 0.65);
+    --glass-blur: blur(14px);
+
+    /* Administrative System Status Flags */
+    --state-success: #00e676;
+    --state-pending: #ffea00;
+}
+
+body[data-theme="light"] {
+    /* Baseline Canvases - Sourced directly from your menu.html cream background variables */
+    --bg-canvas: #fdfbf7;
+    /* Exact matching customer backdrop cream */
+    --bg-surface: rgba(255, 255, 255, 0.82);
+    --bg-surface-solid: #ffffff;
+    --bg-sidebar: rgba(245, 240, 230, 0.98);
+    /* Warmer cream-stone drawer */
+    --border-subtle: rgba(107, 20, 38, 0.08);
+    /* Tinted with your signature maroon border */
+
+    /* Typography Matrix */
+    --text-main: #1a1112;
+    /* Charcoal ink text matching your customer layout */
+    --text-muted: #786f6f;
+
+    /* Brand Accent Alignment */
+    --primary-accent: #6b1426;
+    /* Shift primary accent to your signature maroon for light visibility */
+    --primary-accent-glow: rgba(107, 20, 38, 0.08);
+    --secondary-pop: #d36135;
+    /* Shift secondary to burnt orange */
+    --card-shadow: 0 12px 35px rgba(107, 20, 38, 0.06);
+    --glass-blur: blur(10px);
+
+    /* Administrative System Status Flags */
+    --state-success: #2e7d32;
+    --state-pending: #f57f17;
+}
+
+/* Base Global Standardizations */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.2s ease;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg-canvas);
+    color: var(--text-main);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* ==========================================================================
+   --- 2. AMBIENT BACKDROP VISUAL GENERATORS ---
+   ========================================================================== */
+.dashboard-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(circle at 80% 20%, var(--primary-accent-glow), transparent 40%);
+    z-index: -2;
+}
+
+.bg-glow-sphere {
+    position: fixed;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    filter: blur(18px);
+    opacity: 0.12;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.glow-terracotta {
+    top: -10%;
+    left: 20%;
+    background: var(--primary-accent);
+}
+
+.glow-lavender {
+    bottom: 5%;
+    right: 5%;
+    background: var(--secondary-pop);
+}
+
+/* Master Layout Framework */
+.dashboard-master-wrapper {
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+}
+
+/* ==========================================================================
+   --- 3. MODULAR SIDEBAR NAVIGATION MECHANICS ---
+   ========================================================================== */
+.sidebar-navigation-drawer {
+    width: 280px;
+    background: var(--bg-sidebar);
+    border-right: 1px solid var(--border-subtle);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    backdrop-filter: var(--glass-blur);
+    z-index: 100;
+    flex-shrink: 0;
+}
+
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.sidebar-header h2 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.sidebar-header h2 span {
+    color: var(--primary-accent);
+}
+
+.close-sidebar-btn {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--text-main);
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+.sidebar-links-list {
+    list-style: none;
+    flex-grow: 1;
+}
+
+.sidebar-links-list li {
+    margin-bottom: 8px;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 18px 20px;
+    color: var(--text-main);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    border-radius: 8px;
+}
+
+.nav-link i {
+    font-size: 1.1rem;
+    width: 20px;
+    text-align: center;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: var(--primary-accent);
+    background: var(--primary-accent-glow);
+    box-shadow: inset 3px 0 0 var(--primary-accent);
+}
+
+/* Lower Sidebar Utilities & Theme Toggle */
+.sidebar-footer-utilities {
+    border-top: 1px solid var(--border-subtle);
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.theme-switch-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 4px;
+}
+
+.theme-label-block {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.toggle-switch-shell {
+    position: relative;
+    display: inline-block;
+    width: 46px;
+    height: 24px;
+}
+
+.toggle-switch-shell input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.toggle-slider-knob {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--border-subtle);
+    border: 1px solid var(--border-subtle);
+    border-radius: 34px;
+}
+
+.toggle-slider-knob:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 3px;
+    bottom: 3px;
+    background-color: var(--text-main);
+    border-radius: 50%;
+    transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+input:checked+.toggle-slider-knob {
+    background-color: var(--primary-accent-glow);
+    border-color: var(--primary-accent);
+}
+
+input:checked+.toggle-slider-knob:before {
+    transform: translateX(22px);
+    background-color: var(--primary-accent);
+}
+
+.logout-action-link {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 16px;
+    color: #ff5252;
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    border-radius: 8px;
+}
+
+.logout-action-link:hover {
+    background: rgba(255, 82, 82, 0.1);
+}
+
+/* ==========================================================================
+   --- 4. WORKSPACE PLATFORM & APP HEADER BAR ---
+   ========================================================================== */
+.main-content-workspace {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    /* Prevents layout bursting */
+}
+
+.top-bar-navigation {
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.menu-hamburger-btn {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--text-main);
+    font-size: 1.4rem;
+    cursor: pointer;
+}
+
+.top-bar-navigation h1 {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.admin-avatar-badge {
+    position: relative;
+    width: 44px;
+    height: 44px;
+}
+
+.admin-avatar-badge img {
+    /* width: 100%; */
+    height: 132%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--border-subtle);
+}
+
+.avatar-status-dot {
+    position: absolute;
+    bottom: -10px;
+    left: 41px;
+    /* right: 2px; */
+    width: 13px;
+    height: 13px;
+    background-color: var(--state-success);
+    border-radius: 50%;
+    border: 2px solid var(--bg-canvas);
+}
+
+/* Workspace Views Base Card Panels */
+.workspace-viewport-pane {
+    padding: 40px;
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active-viewport-section {
+    display: block;
+    animation: fadeInPane 0.4s ease forwards;
+}
+
+@keyframes fadeInPane {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ==========================================================================
+   --- 5. DASHBOARD STATS OVERVIEW CARDS ---
+   ========================================================================== */
+.stats-grid-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    margin-bottom: 32px;
+}
+
+.metric-card-widget {
+    background: var(--bg-surface);
+    backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--border-subtle);
+    padding: 24px;
+    border-radius: 16px;
+    box-shadow: var(--card-shadow);
+}
+
+
+.metric-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.metric-title {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-muted);
+}
+
+.icon-box {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+}
+
+.terracotta-glow {
+    background: rgb(255 26 0 / 10%);
+    color: var(--primary-accent);
+    padding-top: 11px;
+    padding-left: 16px;
+}
+
+.amber-glow {
+    background: rgba(255, 179, 0, 0.1);
+    color: #ffb300;
+    padding-top: 11px;
+    padding-left: 12px;
+}
+
+.green-glow {
+    background: rgba(0, 230, 118, 0.1);
+    color: var(--state-success);
+    padding-top: 11px;
+    padding-left: 13px;
+}
+
+.metric-value {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.metric-trend {
+    font-size: 0.8rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.up-trend {
+    color: var(--state-success);
+}
+
+.steady-trend {
+    color: var(--text-muted);
+}
+
+/* ==========================================================================
+   --- 6. BRAND CUSTOMIZATION SANDBOX VIEW ---
+   ========================================================================== */
+.customization-split-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: start;
+}
+
+.admin-form-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    backdrop-filter: var(--glass-blur);
+    padding: 32px;
+    border-radius: 16px;
+    box-shadow: var(--card-shadow);
+}
+
+.admin-form-card h3 {
+    margin-bottom: 8px;
+    font-size: 1.25rem;
+}
+
+.section-descriptor-text {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+}
+
+.standard-form-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-input-group label {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-muted);
+}
+
+.form-input-group input[type="text"],
+.form-input-group input[type="email"],
+.form-input-group input[type="password"],
+.form-input-group select {
+    background: rgba(0, 0, 0, 0.15);
+    border: 1px solid var(--border-subtle);
+    padding: 12px 16px;
+    border-radius: 8px;
+    color: var(--text-main);
+    font-family: inherit;
+    font-size: 0.9rem;
+    outline: none;
+}
+
+body[data-theme="light"] .form-input-group input[type="text"],
+body[data-theme="light"] .form-input-group input[type="email"],
+body[data-theme="light"] .form-input-group input[type="password"],
+body[data-theme="light"] .form-input-group select {
+    background: rgba(255, 255, 255, 0.6);
+}
+
+.form-input-group input:focus,
+.form-input-group select:focus {
+    border-color: var(--primary-accent);
+}
+
+.form-input-group input[type="color"] {
+    -webkit-appearance: none;
+    border: none;
+    width: 60px;
+    height: 40px;
+    border-radius: 6px;
+    cursor: pointer;
+    background: transparent;
+}
+
+.form-input-group input[type="color"]::-webkit-color-swatch-wrapper {
+    padding: 0;
+}
+
+.form-input-group input[type="color"]::-webkit-color-swatch {
+    border: 1px solid var(--border-subtle);
+    border-radius: 6px;
+}
+
+.form-action-submit-btn {
+    background: var(--secondary-pop);
+    color: white;
+    border: none;
+    padding: 14px;
+    border-radius: 8px;
+    font-family: 'Poppins';
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.form-action-submit-btn.alternate-color-btn {
+    background: var(--secondary-pop);
+}
+
+/* Real-time Visual Device Mockup Sandbox */
+.preview-device-mockup {
+    background: var(--bg-surface-solid);
+    border: 12px solid var(--border-subtle);
+    border-radius: 32px;
+    height: 560px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: var(--card-shadow);
+}
+
+.mockup-header-nav {
+    height: 54px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    background: var(--secondary-pop);
+    color: white;
+    font-weight: 700;
+    font-family: 'Poppins';
+}
+
+.mockup-viewport-body {
+    padding: 20px;
+    flex-grow: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.mockup-hint-label {
+    font-size: 0.75rem;
+    text-align: center;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Preview Rendering Layout Configurations dynamically handled */
+#preview-menu-container {
+    display: grid;
+    gap: 12px;
+}
+
+.preview-grid-density {
+    grid-template-columns: 1fr 1fr;
+}
+
+.preview-list-density {
+    grid-template-columns: 1fr;
+}
+
+.sample-item {
+    background: var(--bg-canvas);
+    border: 1px solid var(--border-subtle);
+    padding: 16px;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.sample-item i {
+    font-size: 1.5rem;
+    color: var(--primary-accent);
+    margin-bottom: 8px;
+}
+
+.sample-item h4 {
+    font-size: 0.85rem;
+    margin-bottom: 4px;
+}
+
+.sample-item p {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+/* ==========================================================================
+   --- 7. DATA TABLES LEDGERS & REGISTRIES ---
+   ========================================================================== */
+.admin-table-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    backdrop-filter: var(--glass-blur);
+    border-radius: 16px;
+    box-shadow: var(--card-shadow);
+    overflow: hidden;
+}
+
+.table-card-header {
+    padding: 24px 32px;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.table-responsive-scroller {
+    overflow-x: auto;
+}
+
+.dashboard-data-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 0.9rem;
+}
+
+.dashboard-data-table th,
+.dashboard-data-table td {
+    padding: 16px 32px;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.dashboard-data-table th {
+    background: rgba(0, 0, 0, 0.08);
+    border: 1px solid #786f6f5c;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.weight-bold {
+    font-weight: 600;
+}
+
+.access-pill,
+.status-pill {
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.role-admin {
+    background: rgba(0, 229, 255, 0.1);
+    color: var(--primary-accent);
+}
+
+.role-chef {
+    background: rgba(187, 134, 252, 0.1);
+    color: var(--secondary-pop);
+}
+
+.state-settled {
+    background: rgba(0, 230, 118, 0.1);
+    color: var(--state-success);
+}
+
+.metrics-indicator-positive {
+    color: var(--state-success);
+    font-weight: 500;
+}
+
+.max-width-form-constrain {
+    max-width: 600px;
+}
+
+/* ==========================================================================
+   --- 8. RESPONSIVE DESIGN VIEWPORT QUERIES ---
+   ========================================================================== */
+@media (max-width: 1024px) {
+    .customization-split-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .sidebar-navigation-drawer {
+        position: fixed;
+        left: -280px;
+        top: 0;
+        bottom: 0;
+        transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .sidebar-navigation-drawer.active-drawer {
+        left: 0;
+    }
+
+    .close-sidebar-btn,
+    .menu-hamburger-btn {
+        display: block;
+    }
+
+    .top-bar-navigation {
+        padding: 0 24px;
+    }
+    .top-bar-navigation h1 {
+        padding: 0 24px;
+        line-height: 1.0
+    }
+
+    .workspace-viewport-pane {
+        padding: 24px;
+    }
+
+    .dashboard-data-table th,
+    .dashboard-data-table td {
+        padding: 12px 20px;
+    }
+}

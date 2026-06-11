@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartDine Management | Admin Dashboard Portal</title>
+    <link rel="stylesheet" href="admin1.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body data-theme="dark">
+
+    <div class="dashboard-bg"></div>
+    <div class="bg-glow-sphere glow-terracotta"></div>
+    <div class="bg-glow-sphere glow-lavender"></div>
+
+    <main class="dashboard-master-wrapper">
+
+        <aside id="sidebar" class="sidebar-navigation-drawer">
+            <div class="sidebar-header">
+                <h2>SMART<span>DINE</span></h2>
+                <button id="close-sidebar" class="close-sidebar-btn" aria-label="Close Sidebar">&times;</button>
+            </div>
+
+            <ul class="sidebar-links-list">
+                <li>
+                    <a href="#" class="nav-link active" data-target="dash-home">
+                        <i class="fas fa-home"></i> <span>Dashboard Home</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="nav-link" data-target="brand-custom">
+                        <i class="fas fa-paint-brush"></i> <span>Brand Customization</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="nav-link" data-target="team-manage">
+                        <i class="fas fa-users"></i> <span>Team Management</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="nav-link" data-target="sales-analytics">
+                        <i class="fas fa-chart-line"></i> <span>Sales Analytics</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="nav-link" data-target="admin-profile">
+                        <i class="fas fa-user-cog"></i> <span>Admin Profile</span>
+                    </a>
+                </li>
+            </ul>
+
+            <div class="sidebar-footer-utilities">
+                <div class="theme-switch-row">
+                    <div class="theme-label-block">
+                        <i class="fas fa-moon" id="theme-mode-icon"></i>
+                        <span id="theme-mode-text">Dark Mode</span>
+                    </div>
+                    <label class="toggle-switch-shell">
+                        <input type="checkbox" id="theme-toggle-checkbox" checked>
+                        <span class="toggle-slider-knob"></span>
+                    </label>
+                </div>
+
+                <a href="#" class="logout-action-link" id="admin-logout-trigger">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Exit Dashboard</span>
+                </a>
+            </div>
+        </aside>
+
+        <div class="main-content-workspace">
+
+            <header class="top-bar-navigation">
+                <button id="menu-toggle" class="menu-hamburger-btn" aria-label="Open Navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h1 id="workspace-view-title">Dashboard Home</h1>
+                <div class="admin-avatar-badge">
+                    <img src="cato1.jpeg" alt="Admin Profile">
+                    <div class="avatar-status-dot"></div>
+                </div>
+            </header>
+
+            <div class="workspace-viewport-pane">
+                <div class="workspace-heading">
+                    <h2>Welcome back, Admin 👋</h2>
+                    <p>Here's what's cooking with SmartDine today.</p><br>
+                </div>
+
+                <section id="dash-home" class="tab-content active-viewport-section">
+                    <div class="stats-grid-row">
+                        <div class="metric-card-widget">
+                            <div class="metric-header">
+                                <span class="metric-title">Gross Revenue</span>
+                                <i class="fas fa-dollar-sign icon-box terracotta-glow"></i>
+                            </div>
+                            <div class="metric-value">PKR 458,200</div>
+                            <span class="metric-trend up-trend"><i class="fas fa-arrow-up"></i> +12.4% this week</span>
+                        </div>
+                        <div class="metric-card-widget">
+                            <div class="metric-header">
+                                <span class="metric-title">Active Table Tickets</span>
+                                <i class="fas fa-utensils icon-box amber-glow"></i>
+                            </div>
+                            <div class="metric-value">14 Orders</div>
+                            <span class="metric-trend up-trend"><i class="fas fa-arrow-up"></i> +4.2% bounce rate</span>
+                        </div>
+                        <div class="metric-card-widget">
+                            <div class="metric-header">
+                                <span class="metric-title">System Health Node</span>
+                                <i class="fas fa-server icon-box green-glow"></i>
+                            </div>
+                            <div class="metric-value">99.9% Online</div>
+                            <span class="metric-trend steady-trend"><i class="fas fa-check-circle"></i> Sync
+                                operational</span>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="brand-custom" class="tab-content">
+                    <div class="customization-split-grid">
+                        <div class="admin-form-card">
+                            <h3>Brand Parameters Configuration</h3>
+                            <p class="section-descriptor-text">Update global theme variables dynamically across live
+                                menus.</p>
+
+                            <form id="brand-settings-form" class="standard-form-layout">
+                                <div class="form-input-group">
+                                    <label for="input-name">Restaurant Corporate Title</label>
+                                    <input type="text" id="input-name" placeholder="e.g. The Royal Palate">
+                                </div>
+                                <div class="form-input-group">
+                                    <label for="input-color">Brand Signature Accent Color</label>
+                                    <input type="color" id="input-color" value="#FFD700">
+                                </div>
+                                <div class="form-input-group">
+                                    <label for="input-layout">Menu Catalog Grid Column Density</label>
+                                    <select id="input-layout">
+                                        <option value="grid">Density Focused Matrix (2-Column Grid)</option>
+                                        <option value="list">Single Line Rows (List Presentation)</option>
+                                    </select>
+                                </div>
+                                <button type="button" class="form-action-submit-btn ">Apply Brand Settings</button>
+                            </form>
+                        </div>
+
+                        <div class="preview-device-mockup">
+                            <div class="mockup-header-nav" id="preview-nav">
+                                <span id="preview-logo-text">The Royal Palate</span>
+                                <i class="fas fa-shopping-basket"></i>
+                            </div>
+                            <div class="mockup-viewport-body">
+                                <p class="mockup-hint-label">Dynamic Sandbox Realtime Layout Viewport</p>
+                                <div id="preview-menu-container" class="preview-grid-density">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="team-manage" class="tab-content">
+                    <div class="admin-table-card">
+                        <div class="table-card-header">
+                            <h3>Operational Team Registry</h3>
+                        </div>
+                        <div class="table-responsive-scroller">
+                            <table class="dashboard-data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Staff Member</th>
+                                        <th>Functional Access Level</th>
+                                        <th>Performance Index</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Asif Khan</td>
+                                        <td><span class="access-pill role-admin">Executive Administrator</span></td>
+                                        <td class="metrics-indicator-positive">94.8% Active Efficiency</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Zainab Ahmed</td>
+                                        <td><span class="access-pill role-chef">Kitchen Head Coordinator</span></td>
+                                        <td class="metrics-indicator-positive">98.2% Accuracy Rating</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="sales-analytics" class="tab-content">
+                    <div class="admin-table-card">
+                        <div class="table-card-header">
+                            <h3>Live Financial Settlement Ledger</h3>
+                        </div>
+                        <div class="table-responsive-scroller">
+                            <table class="dashboard-data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Transaction Reference</th>
+                                        <th>Table Context Destination</th>
+                                        <th>Total Settled Amount</th>
+                                        <th>Payment Settlement Core</th>
+                                        <th>Gateway Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>#TXN-40892</td>
+                                        <td>BYOD-Table #04</td>
+                                        <td class="weight-bold">PKR 3,450</td>
+                                        <td>Cash Payment Registry</td>
+                                        <td><span class="status-pill state-settled">Settled</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>#TXN-40893</td>
+                                        <td>Online Delivery Node</td>
+                                        <td class="weight-bold">PKR 1,650</td>
+                                        <td>Digital Cloud Wallet</td>
+                                        <td><span class="status-pill state-settled">Settled</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="admin-profile" class="tab-content">
+                    <div class="admin-form-card max-width-form-constrain">
+                        <h3>Identity Profile Account Management</h3>
+                        <p class="section-descriptor-text">Modify security keys and cryptographic authentication
+                            parameters below.</p>
+
+                        <form id="profile-management-form" class="standard-form-layout">
+                            <div class="form-input-group">
+                                <label for="full-name">Master Administrator Full Name</label>
+                                <input type="text" id="full-name" placeholder="e.g. Master Admin Console">
+                            </div>
+                            <div class="form-input-group">
+                                <label for="admin-email">Corporate Email Link Node</label>
+                                <input type="email" id="admin-email" placeholder="admin@smartdine.com">
+                            </div>
+                            <div class="form-input-group">
+                                <label for="admin-pass">Secure Access Passphrase Key</label>
+                                <input type="password" id="admin-pass" placeholder="••••••••••••••••">
+                            </div>
+                            <button type="button" class="form-action-submit-btn alternate-color-btn">Update Profile
+                                Matrix</button>
+                        </form>
+                    </div>
+                </section>
+
+            </div>
+        </div>
+    </main>
+
+    <script src="admin1.js"></script>
+</body>
+
+</html>

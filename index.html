@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartDine Portal | Exceptional Dining</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+
+    <header class="main-nav">
+        <div class="nav-container">
+            <div class="logo">SMART<span>DINE</span></div>
+
+            <nav id="public-links">
+                <a href="#" class="nav-trigger active" data-view="home-view">Home</a>
+                <a href="#" class="nav-trigger" data-view="menu-view">Menu</a>
+                <a href="#" class="nav-trigger" data-view="book-view">Reservations</a>
+                <a href="#" class="nav-trigger" data-view="contact-view">Contact</a>
+                <a href="#" class="nav-trigger" data-view="admin-login-view">Admin Login</a>
+            </nav>
+
+            <div id="table-badge" class="hidden-element">Table #--</div>
+
+            <div id="cart-icon" class="cart-icon-wrapper">
+                <i class="fas fa-shopping-basket"></i>
+                <span id="cart-count">0</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="app-view-container">
+
+        <section id="kitchen-view" class="view-section">
+            <div class="kitchen-dashboard-header">
+                <div>
+                    <h2>Kitchen Orders <span class="text-highlight">Control Station</span></h2>
+                    <p>Active Multi-Node Node Status: <span class="badge active-node-badge">NODE_01_ONLINE</span></p>
+                </div>
+                <div class="kitchen-stats-strip">
+                    <div class="stat-pill">Pending: <span id="count-pending">0</span></div>
+                    <div class="stat-pill cooking">Cooking: <span id="count-cooking">0</span></div>
+                </div>
+            </div>
+
+            <div class="kitchen-pipeline-grid">
+                <div class="pipeline-node-lane" id="lane-preparation">
+                    <h3 class="lane-title"><i class="fas fa-hourglass-start"></i> Preparation Queue</h3>
+                    <div class="ticket-cards-holder" id="queue-prep-cards"></div>
+                </div>
+
+                <div class="pipeline-node-lane" id="lane-cooking">
+                    <h3 class="lane-title"><i class="fas fa-fire"></i> Hot Line (Expedite)</h3>
+                    <div class="ticket-cards-holder" id="queue-cooking-cards"></div>
+                </div>
+            </div>
+        </section>
+
+        <div id="staff-auth-modal" class="auth-modal-overlay">
+            <div class="auth-modal-card">
+                <div class="auth-card-icon"><i class="fas fa-user-shield"></i></div>
+                <h3>Staff Authentication</h3>
+                <p>Enter Master Station Node PIN Access Gateway</p>
+                <form id="staff-pin-form">
+                    <input type="password" id="staff-pin-input" maxlength="4" placeholder="••••" autocomplete="off"
+                        required>
+                    <div id="auth-error-msg" class="auth-error-text"></div>
+                    <div class="auth-modal-actions">
+                        <button type="button" class="auth-cancel-btn" id="close-auth-modal-btn">Cancel</button>
+                        <button type="submit" class="auth-submit-btn">Unlock Node</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <section id="home-view" class="view-section active">
+            <div id="customer-live-tracker" class="live-tracker-panel" style="display: none;">
+                <div class="tracker-card-header">
+                    <h4>Live Order Tracking <span id="track-ticket-id">#000</span></h4>
+                    <span class="pulse-indicator-dot"></span>
+                </div>
+
+                <div class="tracker-timeline-nodes">
+                    <div class="timeline-step active-step" id="step-prep">
+                        <div class="step-icon-circle"><i class="fas fa-utensils"></i></div>
+                        <span>Preparing</span>
+                    </div>
+                    <div class="timeline-step" id="step-cooking">
+                        <div class="step-icon-circle"><i class="fas fa-fire"></i></div>
+                        <span>Cooking</span>
+                    </div>
+                    <div class="timeline-step" id="step-ready">
+                        <div class="step-icon-circle"><i class="fas fa-check-circle"></i></div>
+                        <span>Ready / Served</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="home-hero-dynamic-split">
+                <div class="hero-text-side">
+                    <div class="hero-mini-tag"><i class="fas fa-sparkles"></i> Smart Dining Revolution</div>
+                    <h2>Welcome to <span class="accent-text">SmartDine Experience</span></h2>
+                    <p>Where traditional culinary mastery meets contemporary technological sophistication. Scan, browse,
+                        and route your order straight into our active cooking pipelines instantly.</p>
+
+                    <div class="hero-action-row">
+                        <button class="btn-primary" onclick="switchActivePortalView('menu-view')">
+                            Explore Menu <i class="fas fa-arrow-right"></i>
+                        </button>
+                        <button class="btn-secondary" onclick="switchActivePortalView('book-view')">
+                            <i class="far fa-calendar-check"></i> Secure Table
+                        </button>
+                    </div>
+                </div>
+
+                <div class="hero-image-side">
+                    <div class="floating-hero-card">
+                        <img src="https://images.unsplash.com/photo-1680352857479-2a560bbb98bc?q=80&w=387&auto=format&fit=crop"
+                            alt="Signature Showcase Burger">
+                        <div class="hero-image-badge">
+                            <i class="fas fa-fire"></i> Trending #1
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-divider-title">
+                <span>Why Choose SmartDine</span>
+            </div>
+
+            <div class="feature-highlights-grid">
+                <div class="feat-card">
+                    <div class="feat-icon-frame"><i class="fas fa-leaf"></i></div>
+                    <div class="feat-card-text">
+                        <h3>Premium Sourcing</h3>
+                        <p>Organic, high-grade ingredients selected by our master chefs from exceptional local farms
+                            daily.</p>
+                    </div>
+                </div>
+                <div class="feat-card">
+                    <div class="feat-icon-frame"><i class="fas fa-bolt"></i></div>
+                    <div class="feat-card-text">
+                        <h3>Instant Kitchen Routing</h3>
+                        <p>Zero middle-man delays. Your selections are formatted dynamically and sent straight to the
+                            chef lines.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+<section id="admin-login-view" class="view-section" style="display: none;">
+    <div style="min-height: 80vh; display: flex; align-items: center; justify-content: center; padding: 20px;">
+        <div style="background: var(--bg-card); border: 2px solid #6b142691; padding: 40px; border-radius: 20px; box-shadow: var(--shadow-elevated); width: 100%; max-width: 400px; text-align: center;">
+            <i class="fas fa-user-shield" style="font-size: 3.5rem; color: var(--primary-accent); margin-bottom: 16px;"></i>
+            <h3 style="color: var(--text-main); font-weight: 700; margin-bottom: 6px; font-family: 'Poppins', sans-serif;">Admin Management Terminal</h3>
+            <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 24px;">Restricted system architecture access gate</p>
+            
+            <form onsubmit="window.executeAdminAuthenticationGate(event)">
+                <div style="text-align: left; margin-bottom: 16px;">
+                    <label style="font-size: 0.8rem; font-weight: 600; color: var(--text-muted); display: block; margin-bottom: 6px;">Admin ID Identifier</label>
+                    <input type="text" id="admin-username-field" placeholder="Enter Admin Username" required style="width: 100%; padding: 12px 16px; border: 1px solid var(--border-subtle); border-radius: 8px; font-size: 14px; outline: none; background: #fff; color: #000; ">
+                </div>
+                <div style="text-align: left; margin-bottom: 24px;">
+                    <label style="font-size: 0.8rem; font-weight: 600; color: var(--text-muted); display: block; margin-bottom: 6px;">Secure Access Keypass</label>
+                    <input type="password" id="admin-password-field" placeholder="••••••••" required style="width: 100%; padding: 12px 16px; border: 1px solid var(--border-subtle); border-radius: 8px; font-size: 1rem; outline: none; background: #fff; color: #000;">
+                </div>
+                <button type="submit" style="width: 100%; background: var(--primary-accent); color: white; border: none; padding: 14px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 1rem; font-family: 'Poppins';">Authenticate Session</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<section id="admin-dashboard-view" class="view-section" style="display: none;">
+    <div style="max-width: 1400px; margin: 24px auto; padding: 0 20px;">
+        
+        <div style="display: flex; justify-content: space-between; align-items: center; background: var(--bg-card); padding: 16px 24px; border-radius: var(--radius-standard); border: 1px solid var(--border-subtle); margin-bottom: 24px; box-shadow: var(--shadow-standard);">
+            <div>
+                <h2 style="font-size: 1.4rem; font-weight: 700; color: var(--text-main); font-family: 'Poppins', sans-serif;"><i class="fas fa-chart-line" style="color: var(--secondary-pop);"></i> Operational Control Board</h2>
+                <p style="font-size: 0.8rem; color: var(--text-muted);">Real-time server synchronization pipeline metrics</p>
+            </div>
+            <button onclick="window.terminateAdminSessionSecurely()" style="background: transparent; border: 1px solid var(--primary-accent); color: var(--primary-accent); padding: 8px 16px; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 0.85rem;"><i class="fas fa-sign-out-alt"></i> Logout</button>
+        </div>
+
+        <div class="kitchen-lanes-board-grid-matrix" style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+            <div class="kitchen-lane-column" style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-standard); overflow: hidden; box-shadow: var(--shadow-standard);">
+                <div class="lane-title-header orange-lane-bg" style="padding: 14px; color: white; font-weight: bold; text-align: center; background: var(--secondary-pop); text-transform: uppercase; font-size: 0.85rem; letter-spacing: 0.5px;">Staged Prep Station</div>
+                <div id="dashboard-lane-prep-stack" style="padding: 16px; display: flex; flex-direction: column; gap: 12px; min-height: 400px; max-height: 55vh; overflow-y: auto;">
+                    </div>
+            </div>
+            <div class="kitchen-lane-column" style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-standard); overflow: hidden; box-shadow: var(--shadow-standard);">
+                <div class="lane-title-header blue-lane-bg" style="padding: 14px; color: white; font-weight: bold; text-align: center; background: green; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 0.5px;">Active Cooking Range</div>
+                <div id="dashboard-lane-cooking-stack" style="padding: 16px; display: flex; flex-direction: column; gap: 12px; min-height: 400px; max-height: 55vh; overflow-y: auto;">
+                    </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<div id="admin-floating-toggle-switch-panel" class="admin-floating-switch-bar-wrapper" style="display: none;">
+    <div style="font-size: 0.85rem; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 8px;">
+        <span style="display:inline-block; width:8px; height:8px; background:#22c55e; border-radius:50%; animation: pulse 1.5s infinite;"></span>
+        ADMIN MODE ACTIVE
+    </div>
+    <div style="display: flex; gap: 10px;">
+        <button id="switch-to-dashboard-action-btn" onclick="window.adminNavigateToView('admin-dashboard-view')" class="admin-panel-toggle-btn active-state">
+            <a href="admin1.html" style="color: inherit; text-decoration: none;"><i class="fas fa-columns"></i> Go To Dashboard Home</a>
+        </button>
+        <button id="switch-to-menu-action-btn" onclick="window.adminNavigateToView('menu-view')" class="admin-panel-toggle-btn">
+            <i class="fas fa-hamburger"></i> Inspect Live Menu
+        </button>
+    </div>
+</div>
+
+        <section id="staff-gate-view" class="view-section">
+            <div class="auth-gate-centerpiece-box">
+                <div class="auth-card-top-header">
+                    <i class="fas fa-shield-alt" style="font-size: 2.5rem; color: var(--primary-accent); margin-bottom: 10px;"></i>
+                    <h3>Staff Authentication Gate</h3>
+                    <p>Select profile account and input system passkey code</p>
+                </div>
+                
+                <form id="secure-staff-terminal-form" onsubmit="window.verifyStaffCredentials(event)">
+                    <div class="input-block" style="margin-bottom: 15px;">
+                        <label for="staff-server-name">Employee User Profile</label>
+                        <select id="staff-server-name" required style="width: 100%; padding: 12px; border-radius: 10px; background: var(--bg-pill-inactive); color: var(--text-main); font-weight: 500; border: none; outline: none;">
+                            <option value="" disabled selected>Select profile node identity...</option>
+                            <option value="Manager Mehmal">Manager Mehmal (Admin)</option>
+                            <option value="Server Bushra">Server Bushra (Floor)</option>
+                            <option value="Server Zain">Server Zain (Floor)</option>
+                        </select>
+                    </div>
+
+                    <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+                        <input type="password" id="staff-pin-display" placeholder="••••" readonly style="flex: 1; text-align: center; font-size: 1.6rem; font-weight: bold; background: #2b1619 !important; color: #ffb3b8 !important; border-radius: 12px; border: none; letter-spacing: 8px;">
+                        <button type="button" onclick="window.clearPinDisplay()" style="padding: 0 16px; background: var(--text-muted); color: white; border: none; border-radius: 12px; font-weight: 600; cursor: pointer;">Clear</button>
+                    </div>
+
+                    <div class="pin-touch-matrix-grid">
+                        <button type="button" class="key-pad-button" onclick="window.pressPinKey('1')">1</button>
+                        <button type="button" class="key-pad-button" onclick="window.pressPinKey('2')">2</button>
+                        <button type="button" class="key-pad-button" onclick="window.pressPinKey('3')">3</button>
+                        <button type="button" class="key-pad-button" onclick="window.pressPinKey('4')">4</button>
+                        <button type="button" class="key-pad-button" onclick="window.pressPinKey('5')">5</button>
+                        <button type="button" class="key-pad-button" onclick="window.pressPinKey('6')">6</button>
+                        <button type="button" class="key-pad-button" onclick="window.pressPinKey('7')">7</button>
+                        <button type="button" class="key-pad-button" onclick="window.pressPinKey('8')">8</button>
+                        <button type="button" class="key-pad-button" onclick="window.pressPinKey('9')">9</button>
+                        <button type="button" class="key-pad-button utility-orange-color" onclick="window.switchActivePortalView('kitchen-view')"><i class="fas fa-utensils"></i> Kitchen</button>
+                        <button type="button" class="key-pad-button" onclick="window.pressPinKey('0')">0</button>
+                        <button type="submit" class="key-pad-button utility-green-color"><i class="fas fa-unlock-alt"></i> Go</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <section id="pos-terminal-view" class="view-section">
+            <div class="pos-adaptive-split-layout">
+                
+                <div class="pos-catalog-panel-workspace">
+                    <div class="pos-workspace-header-controls">
+                        <div class="pos-server-badge">
+                            <i class="fas fa-id-badge"></i> Operator: <span id="pos-server-name-display" style="color: var(--secondary-pop); font-weight: 700;">Not Verified</span>
+                        </div>
+                        <button class="pos-exit-system-btn" onclick="window.logoutFromPOS()">
+                            <i class="fas fa-sign-out-alt"></i> Exit Node
+                        </button>
+                    </div>
+
+                    <div class="categories-filter-row" style="margin-bottom: 15px; display: flex; flex-direction: column; justify-content: center; gap: 10px;">
+                        <button class="category-pill active" onclick="window.filterPOSMenu('all', this)">All Items</button>
+                        <button class="category-pill" onclick="window.filterPOSMenu('starters', this)">Starters</button>
+                        <button class="category-pill" onclick="window.filterPOSMenu('mains', this)">Mains</button>
+                        <button class="category-pill" onclick="window.filterPOSMenu('desserts', this)">Desserts</button>
+                        <button class="category-pill" onclick="window.filterPOSMenu('drinks', this)">Beverages</button>
+                    </div>
+
+                    <div id="pos-grid-container" class="pos-internal-dynamic-catalog-grid">
+                        </div>
+                </div>
+
+                <div class="pos-ticket-receipt-pane-sidebar">
+                    <div class="pos-receipt-title-banner">
+                        <h3><i class="fas fa-file-invoice-dollar"></i> Live Station Ticket</h3>
+                    </div>
+
+                    <div id="pos-cart-items" class="pos-scrollable-receipt-items-body">
+                        <p style="color: var(--text-muted); text-align: center; margin-top: 40px;">No items added yet</p>
+                    </div>
+
+                    <div class="pos-receipt-totals-aggregation-footer">
+                        <div style="display: flex; justify-content: space-between; font-weight: bold; font-size: 1.25rem; margin-bottom: 15px; color: var(--text-main);">
+                            <span>Total Due Summary:</span>
+                            <span id="pos-cart-total">PKR 0</span>
+                        </div>
+                        <div class="pos-footer-action-buttons-grid">
+                            <button class="pos-footer-action-trigger pos-danger-clear-btn" onclick="window.clearPOSCart()">
+                                <i class="fas fa-trash-alt"></i> Clear Ticket
+                            </button>
+                            <button class="pos-footer-action-trigger pos-success-send-btn" onclick="window.submitPOSOrderToKitchen()">
+                                <i class="fas fa-paper-plane"></i> Send to Kitchen
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="menu-view" class="view-section">
+            <div class="menu-hero-card">
+                <div class="special-badge-ribbon"><i class="fas fa-star"></i> Chef's Selection</div>
+                <h1>Discover Culinary Excellence</h1>
+                <p>Browse through fresh starters, premium mains, decadent desserts, and cold mocktails curated perfectly
+                    for your palette.</p>
+            </div>
+
+            <div class="category-strip">
+                <button class="category-pill active" onclick="filterMenuCatalog('all', this)"><i
+                        class="fas fa-th-large"></i> All Items</button>
+                <button class="category-pill" onclick="filterMenuCatalog('starters', this)"><i
+                        class="fas fa-cheese"></i> Starters</button>
+                <button class="category-pill" onclick="filterMenuCatalog('mains', this)"><i
+                        class="fas fa-hamburger"></i> Mains</button>
+                <button class="category-pill" onclick="filterMenuCatalog('desserts', this)"><i
+                        class="fas fa-ice-cream"></i> Desserts</button>
+                <button class="category-pill" onclick="filterMenuCatalog('drinks', this)"><i
+                        class="fas fa-glass-martini-alt"></i> Beverages</button>
+            </div>
+
+            <div class="layout-toggle-bar">
+                <span id="items-found-indicator">All (0 items)</span>
+                <div class="toggle-action-buttons">
+                    <button id="toggle-grid-btn" class="active-toggle-btn" onclick="setCatalogLayoutMode('grid')">
+                        <i class="fas fa-th-large"></i>
+                    </button>
+                    <button id="toggle-list-btn" onclick="setCatalogLayoutMode('list')">
+                        <i class="fas fa-list"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div id="menu-grid-catalog" class="grid-layout-activated">
+            </div>
+        </section>
+
+        <section id="book-view" class="view-section">
+            <div class="form-container-card">
+                <h2>Secure Your <span class="accent-text">Table Seating</span></h2>
+                <p>Reserve a premium dining environment instantly.</p>
+                <form id="reservation-submission-form" onsubmit="handleReservationSubmit(event)">
+                    <div class="form-input-element">
+                        <label for="res-date">Preferred Date</label>
+                        <input type="date" id="res-date" name="res_date" required>
+                    </div>
+                    <div class="form-input-element">
+                        <label for="res-time">Target Timeline</label>
+                        <input type="time" id="res-time" name="res_time" required>
+                    </div>
+                    <div class="form-input-element">
+                        <label for="res-name">Your Full Name</label>
+                        <input type="text" id="res-name" name="res_name" placeholder="John Doe" required>
+                    </div>
+                    <div class="form-input-element">
+                        <label for="res-count">Guests Count</label>
+                        <input type="number" id="res-count" name="res_count" min="1" max="25" value="2" required>
+                    </div>
+                    <button type="submit" class="master-action-cta-btn">Confirm My Reservation</button>
+                </form>
+            </div>
+        </section>
+
+        <section id="contact-view" class="view-section">
+            <div class="contact-details-card">
+                <h2> Connect With <span class="accent-text">Our Teams</span></h2>
+                <p>Available for banquets, corporate bookings, and general guest inquiries.</p>
+                <div class="meta-info-strip">
+                    <div><i class="fas fa-phone-alt"></i> Support: +92 42 111-SMART</div>
+                    <div><i class="fas fa-envelope"></i> Core Operations: care@smartdine.io</div>
+                    <div><i class="fas fa-clock"></i> Timings: 12:00 PM - 12:00 AM Daily</div>
+                </div>
+                <form id="booking-form" class="guest-feedback-form"
+                    onsubmit="event.preventDefault(); alert('Inquiry pushed securely.');">
+                    <div class="form-input-element">
+                        <label for="customer-name">Your Name</label>
+                        <input type="text" id="customer-name" name="customer_name" placeholder="Full Name" required>
+                    </div>
+                    <div class="form-input-element">
+                        <label for="message-display">Message Content</label>
+                        <textarea id="message-display" name="message_display" rows="4"
+                            placeholder="How can our culinary specialists accommodate you?" required></textarea>
+                    </div>
+                    <button type="submit" class="master-action-cta-btn">Send Message</button>
+                </form>
+            </div>
+        </section>
+
+        <section id="checkout-page-view" class="view-section">
+            <div class="checkout-page-card">
+                <h2><i class="fas fa-shopping-bag"></i> Complete Your Order</h2>
+                <p id="checkout-context-subtitle">Please fill in details to confirm your request.</p>
+
+                <div class="checkout-review-box">
+                    <h4>Order Review Summary</h4>
+                    <ul id="checkout-summary-items-list">
+                    </ul>
+                    <div
+                        style="display:flex; justify-content:space-between; margin-top:14px; padding-top:10px; border-top:1px dashed var(--text-muted); font-weight:bold;">
+                        <span>Grand Total:</span>
+                        <span id="checkout-page-grand-total" style="color:var(--primary-accent);">PKR 0</span>
+                    </div>
+                </div>
+
+                <form id="checkout-shipping-gateway-form" onsubmit="handleFinalCheckoutSubmit(event)">
+                    <div class="form-input-element">
+                        <label for="page-cust-name">Your Name</label>
+                        <input type="text" id="page-cust-name" name="cust_name" placeholder="e.g. Daim" required>
+                    </div>
+                    <div class="form-input-element">
+                        <label for="page-cust-phone">Contact Phone Number</label>
+                        <input type="tel" id="page-cust-phone" name="cust_phone" placeholder="e.g. 03001234567" required>
+                    </div>
+                    <div class="form-input-element" id="address-input-wrapper">
+                        <label for="page-cust-address">Residential Delivery Address</label>
+                        <textarea id="page-cust-address" name="cust_address" rows="3" placeholder="Enter full street, block, city reference parameters..."></textarea>
+                    </div>
+                    <button type="submit" class="master-action-cta-btn">Place Order </button>
+                </form>
+
+                <button class="master-action-cta-btn"
+                    style="background:var(--bg-pill-inactive); color:var(--text-main); margin-top:12px;"
+                    onclick="window.returnToCatalogMenu()">
+                    <i class="fas fa-arrow-left"></i> Return to Menu Catalog
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="drawer-backdrop-mask" class="drawer-backdrop-mask"></div>
+    <div id="global-flyout-drawer" class="global-flyout-drawer">
+        <div class="drawer-header-block">
+            <h2>Current Basket Order</h2>
+            <button id="close-drawer-trigger-btn" class="close-drawer-x">&times;</button>
+        </div>
+
+        <div id="active-cart-items-list" class="drawer-scroll-body-pane">
+            <p class="fallback-empty-string-msg">No items staged in cart yet.</p>
+        </div>
+
+        <div class="drawer-footer-sticky-block">
+            <div class="financial-summary-row">Total Summary: <span id="cart-total-accumulation-amount">PKR 0</span>
+            </div>
+            <button class="master-action-cta-btn" onclick="window.executeCartCheckout()">
+                Proceed to Table Checkout
+            </button>
+        </div>
+    </div>
+
+    <nav class="mobile-sticky-footer-nav">
+        <a href="#" class="footer-nav-item nav-trigger active" data-view="home-view">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="#" class="footer-nav-item nav-trigger" data-view="menu-view">
+            <i class="fas fa-utensils"></i>
+            <span>Menu</span>
+        </a>
+        <a href="#" class="footer-nav-item nav-trigger" data-view="book-view">
+            <i class="fas fa-calendar-alt"></i>
+            <span>Book</span>
+        </a>
+        <a href="#" class="footer-nav-item nav-trigger" data-view="contact-view">
+            <i class="fas fa-envelope"></i>
+            <span>Contact</span>
+        </a>
+        <a href="#" class="footer-nav-item nav-trigger" data-view="staff-gate-view">
+            <i class="fas fa-user-lock"></i>
+            <span>Staff Terminal</span>
+        </a>
+        <!-- <a href="#" class="footer-nav-item nav-trigger" data-view="admin-login-view">
+            <i class="fas fa-user-shield"></i>
+            <span>Admin Login</span>
+        </a> -->
+    </nav>
+    
+    <script src="script.js"></script>
+</body>
+
+</html>

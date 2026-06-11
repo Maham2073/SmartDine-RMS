@@ -1,0 +1,1846 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+/* --- SMARTDINE BYOD DYNAMIC MULTI-THEME CONFIGURATION --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+}
+
+:root {
+    --bg-canvas: #fdfbf7;
+    --bg-card: #ffffff;
+    --bg-pill-inactive: #f3eee3;
+    --primary-accent: #6b1426;
+    --secondary-pop: #d36135;
+    --text-main: #1a1112;
+    --text-muted: #786f6f;
+    --border-subtle: rgba(107, 20, 38, 0.06);
+    --card-shadow: 0 12px 35px rgba(107, 20, 38, 0.05);
+}
+
+/* SYSTEM BOUNDARY & MOBILE COMPONENT OVERRIDES */
+body {
+    background-color: var(--bg-canvas);
+    color: var(--text-main);
+    font-family: 'Poppins', system-ui, -apple-system, sans-serif;
+    line-height: 1.5;
+    overflow-x: hidden;
+    transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+.app-view-container {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 80px 16px 100px 16px;
+    min-height: 100vh;
+    position: relative;
+}
+
+/* CORE VIEW SWITCHING ENGINE VISIBILITY FLAGS */
+.view-section {
+    display: none !important;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.4s ease-out, transform 0.3s ease-out;
+}
+
+.view-section.active {
+    display: block !important;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.hidden-element {
+    display: none !important;
+}
+
+/* 1. GLOBAL COMPONENT LAYOUT MECHANICS*/
+.main-nav {
+    background: var(--bg-card);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 65px;
+    z-index: 1000;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+    border-bottom: 1px solid var(--border-subtle);
+    display: flex;
+    align-items: center;
+}
+
+.nav-container {
+    width: 100%;
+    /* max-width: 550px; */
+    margin: 0 auto;
+    padding: 0 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.25rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    color: var(--text-main);
+    cursor: pointer;
+}
+
+.logo span {
+    color: var(--secondary-pop);
+}
+
+#public-links {
+    display: flex;
+    gap: 40px;
+}
+
+#public-links a {
+    text-decoration: none;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+#public-links a.active,
+#public-links a:hover {
+    color: var(--primary-accent);
+    font-weight: 600;
+}
+
+#table-badge {
+    background-color: var(--secondary-pop);
+    color: var(--bg-card);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.cart-icon-wrapper {
+    position: relative;
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: var(--text-main);
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-pill-inactive);
+    border-radius: 50%;
+    transition: transform 0.2s;
+}
+
+.cart-icon-wrapper:active {
+    transform: scale(0.9);
+}
+
+#cart-count {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    background-color: var(--secondary-pop);
+    color: #ffffff;
+    font-size: 0.7rem;
+    font-weight: 700;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--bg-card);
+}
+
+/* 2. VIEW A: PUBLIC LANDING HOME VIEW ELEMENTS*/
+.hero-showcase {
+    text-align: center;
+    padding: 40px 10px;
+}
+
+.hero-showcase h2 {
+    font-size: 2rem;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 12px;
+}
+
+.accent-text {
+    color: var(--primary-accent);
+}
+
+.hero-showcase p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-bottom: 24px;
+}
+
+.hero-action-row {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+}
+
+.btn-primary,
+.btn-secondary {
+    padding: 12px 24px;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: transform 0.2s, opacity 0.2s;
+}
+
+.btn-primary {
+    background-color: var(--secondary-pop);
+    color: var(--bg-card);
+    font-family: 'Poppins';
+}
+
+.btn-secondary {
+    background-color: var(--bg-pill-inactive);
+    color: var(--text-main);
+    font-family: 'Poppins';
+}
+
+.feature-highlights-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 20px;
+}
+
+.feat-card {
+    background: var(--bg-card);
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--border-subtle);
+}
+
+.feat-card i {
+    font-size: 1.5rem;
+    color: var(--secondary-pop);
+    margin-bottom: 10px;
+}
+
+.feat-card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 6px;
+}
+
+.feat-card p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+/*3. VIEW B: OPTION E VISUAL MENU ARCHITECTURE*/
+.menu-hero-card {
+    background: linear-gradient(135deg, rgba(26, 26, 26, 0.92), rgba(26, 26, 26, 0.75)),
+        url('https://plus.unsplash.com/premium_photo-1695758787715-90aaf7b99b94?q=80&w=421&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+    background-size: cover;
+    background-position: center;
+    color: #ffffff;
+    padding: 28px 24px;
+    border-radius: 24px;
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--card-shadow);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.special-badge-ribbon {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--secondary-pop);
+    color: #ffffff;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+}
+
+.menu-hero-card h1 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin-bottom: 6px;
+}
+
+.menu-hero-card p {
+    font-size: 0.85rem;
+    opacity: 0.85;
+}
+
+/* Horizontal Scroll Ribbon Category Pills */
+.category-strip {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding: 4px 4px 14px 4px;
+    margin-bottom: 16px;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+}
+
+.category-strip::-webkit-scrollbar {
+    display: none;
+}
+
+.category-pill {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    background: var(--bg-pill-inactive);
+    border: none;
+    border-radius: 25px;
+    color: var(--text-main);
+    font-family: 'Poppins';
+    font-size: 0.85rem;
+    font-weight: 600;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.category-pill.active {
+    background-color: var(--secondary-pop);
+    color: #ffffff;
+}
+
+/* Layout Controller Line */
+.layout-toggle-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 0 4px;
+}
+
+#items-found-indicator {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.toggle-action-buttons {
+    display: flex;
+    background: var(--bg-pill-inactive);
+    padding: 4px;
+    border-radius: 10px;
+    gap: 4px;
+}
+
+.toggle-action-buttons button {
+    background: none;
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    color: var(--text-muted);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+}
+
+.toggle-action-buttons button.active-toggle-btn {
+    background: var(--bg-card);
+    color: var(--text-main);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* Dynamic Option E Twin-Column Grid Display Configuration */
+.grid-layout-activated {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+/* Fallback List Mode presentation modifier */
+.list-layout-activated {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.product-item-card {
+    background: var(--bg-card);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--border-subtle);
+    display: flex;
+    flex-direction: column;
+}
+
+.list-layout-activated .product-item-card {
+    flex-direction: row;
+    height: 110px;
+}
+
+.image-wrapper-frame {
+    position: relative;
+    width: 100%;
+    padding-top: 100%;
+    overflow: hidden;
+}
+
+.list-layout-activated .image-wrapper-frame {
+    width: 110px;
+    height: 110px;
+    padding-top: 0;
+    flex-shrink: 0;
+}
+
+.image-wrapper-frame img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s;
+}
+
+.product-item-card:hover .image-wrapper-frame img {
+    transform: scale(1.05);
+}
+
+.floating-price-tag {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    color: #ffffff;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.quick-add-cart-btn {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background-color: var(--secondary-pop);
+    color: #ffffff;
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 0.8rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    transition: transform 0.2s;
+}
+
+.quick-add-cart-btn:active {
+    transform: scale(0.85);
+}
+
+.product-info-block {
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.list-layout-activated .product-info-block {
+    justify-content: center;
+    padding: 10px 14px;
+}
+
+.product-info-block h3 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+    line-height: 1.3;
+}
+
+.product-info-block p {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* 4. FORM ELEMENTS (RESERVATIONS & CONTACT CONTEXTS) */
+.form-container-card,
+.contact-details-card,
+.checkout-page-card {
+    background: var(--bg-card);
+    padding: 24px;
+    border-radius: 24px;
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--border-subtle);
+    margin-top: 20px;
+}
+
+.form-container-card h2,
+.contact-details-card h2,
+.checkout-page-card h2 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin-bottom: 4px;
+}
+
+.form-container-card p,
+.contact-details-card p,
+.checkout-page-card p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+}
+
+.form-input-element {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 16px;
+}
+
+.form-input-element label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--text-main);
+    letter-spacing: 0.5px;
+}
+
+.form-input-element input,
+.form-input-element select,
+.form-input-element textarea {
+    display: flex;
+    padding: 12px;
+    border-radius: 12px;
+    border: 1px solid var(--bg-pill-inactive);
+    background-color: var(--bg-canvas);
+    color: var(--text-main);
+    font-family: inherit;
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.2s;
+    cursor: pointer;
+}
+
+.form-input-element input:focus,
+.form-input-element select:focus,
+.form-input-element textarea:focus {
+    border-color: var(--secondary-pop);
+}
+
+.master-action-cta-btn {
+    width: 100%;
+    padding: 14px;
+    background-color: var(--primary-accent);
+    color: var(--bg-card);
+    border: none;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: filter 0.2s;
+    margin-top: 10px;
+    font-family: 'Poppins';
+}
+
+.master-action-cta-btn:active {
+    filter: brightness(0.9);
+}
+
+.meta-info-strip {
+    background: var(--bg-canvas);
+    padding: 14px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 0.85rem;
+    border: 2px solid #d3613536;
+}
+
+.meta-info-strip i {
+    color: var(--secondary-pop);
+    margin-right: 6px;
+}
+
+/* 5. SLIDEOUT REVIEW DRAWER WIDGET MECHANICS*/
+.drawer-backdrop-mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px);
+    z-index: 1500;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.drawer-backdrop-mask.active-mask {
+    display: block;
+    opacity: 1;
+}
+
+.global-flyout-drawer {
+    position: fixed;
+    bottom: -100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 480px;
+    height: 80vh;
+    background: var(--bg-card);
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    z-index: 1600;
+    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    transition: bottom 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.global-flyout-drawer.active-drawer {
+    bottom: 0;
+}
+
+.drawer-header-block {
+    padding: 20px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.drawer-header-block h2 {
+    font-size: 1.25rem;
+    font-weight: 800;
+}
+
+.close-drawer-x {
+    background: var(--bg-pill-inactive);
+    border: none;
+    width: 32px;
+    height: 32px;
+    font-size: 1.2rem;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-main);
+}
+
+.drawer-scroll-body-pane {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 20px 24px;
+}
+
+.fallback-empty-string-msg {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-top: 40px;
+}
+
+.cart-item-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.cart-item-details h4 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 2px;
+}
+
+.cart-item-details p {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.cart-item-pricing {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.cart-item-pricing span {
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--primary-accent);
+}
+
+.cart-item-remove-btn {
+    background: none;
+    border: none;
+    color: #ff4d4d;
+    cursor: pointer;
+    font-size: 1.1rem;
+}
+
+.drawer-footer-sticky-block {
+    padding: 20px 24px;
+    border-top: 1px solid var(--border-subtle);
+    background: var(--bg-card);
+}
+
+.financial-summary-row {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 800;
+    font-size: 1.1rem;
+    margin-bottom: 16px;
+}
+
+/* --- UPGRADED HOMEPAGE HERO & TEXT STYLING ENGINE --- */
+.home-hero-dynamic-split {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    padding: 24px 4px;
+    align-items: center;
+}
+
+@media (min-width: 768px){
+    .home-hero-dynamic-split {
+        flex-direction: row;
+        text-align: left;
+        padding: 40px 0;
+    }
+    .hero-text-side { flex: 1; }
+    .hero-image-side { display: flex; justify-content: flex-end; flex: 1; }
+    /* .nav-container{ padding: 0px 10px;} */
+}
+
+.hero-mini-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--bg-pill-inactive);
+    color: var(--secondary-pop);
+    padding: 6px 14px;
+    border-radius: 30px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 16px;
+}
+
+.hero-text-side h2 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 16px;
+    color: var(--text-main);
+    letter-spacing: -0.5px;
+}
+
+.hero-text-side p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 28px;
+}
+
+.floating-hero-card {
+    position: relative;
+    width: 100%;
+    max-width: 380px;
+    border-radius: 28px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+    border: 4px solid var(--bg-card);
+}
+
+.floating-hero-card img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.floating-hero-card:hover img {
+    transform: scale(1.04);
+}
+
+.hero-image-badge {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    color: #ffffff;
+    padding: 6px 12px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.section-divider-title {
+    text-align: center;
+    margin: 40px 0 20px 0;
+    position: relative;
+}
+
+.section-divider-title::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: var(--border-subtle);
+    z-index: 1;
+}
+
+.section-divider-title span {
+    background: var(--bg-canvas);
+    padding: 0 16px;
+    font-size: 0.8rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    position: relative;
+    z-index: 2;
+}
+
+.feat-card {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+}
+
+.feat-icon-frame {
+    background: var(--bg-pill-inactive);
+    color: var(--secondary-pop);
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    flex-shrink: 0;
+}
+
+.feat-card-text {
+    text-align: left;
+}
+
+/* --- RESPONSIVE HEADER UNCLUMPING & NAVIGATION FIXES --- */
+.mobile-sticky-footer-nav {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 68px;
+    background: rgba(255, 255, 255, 0.94);
+    backdrop-filter: blur(12px);
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.04);
+    justify-content: space-around;
+    align-items: center;
+    z-index: 999;
+}
+
+@media (max-width: 767px) {
+    .main-nav a:not(.logo) {
+        display: none !important;
+    }
+    .mobile-sticky-footer-nav {
+        display: flex !important;
+    }
+    .app-view-container {
+        padding-bottom: 80px !important;
+    }
+}
+
+.footer-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.7rem;
+    font-weight: 700;
+    width: 60px;
+    transition: color 0.2s ease;
+}
+
+.footer-nav-item i {
+    font-size: 1.25rem;
+    transition: transform 0.2s ease;
+}
+
+.footer-nav-item.active {
+    color: var(--primary-accent);
+}
+
+.footer-nav-item.active i {
+    transform: translateY(-2px);
+}
+
+/* HIGH-END DESKTOP ENHANCEMENTS */
+@media (min-width: 1024px) {
+    .app-view-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 40px 30px;
+        margin-top: 45px;
+    }
+    .grid-layout-activated {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+        width: 100%;
+    }
+    .contact-details-card,
+    .form-container-card, .checkout-page-card{
+        max-width: 700px;
+        margin: 40px auto;
+        background: var(--bg-card);
+        padding: 40px;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+        border: 1px solid var(--border-subtle);
+    }
+}
+
+/* INDUSTRIAL MULTI-NODE KITCHEN DASHBOARD TERMINAL */
+.kitchen-dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--border-subtle);
+    padding-bottom: 16px;
+    margin-bottom: 24px;
+}
+
+.active-node-badge {
+    background: #27ae60;
+    color: #fff;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: bold;
+}
+
+.kitchen-stats-strip {
+    display: flex;
+    gap: 12px;
+}
+
+.stat-pill {
+    background: var(--bg-pill-inactive);
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.stat-pill.cooking {
+    color: var(--secondary-pop);
+}
+
+.kitchen-pipeline-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-top: 20px;
+}
+
+.pipeline-node-lane {
+    background: rgb(201 109 41 / 21%);
+    border: 1px dashed var(--border-subtle);
+    border-radius: 12px;
+    padding: 16px;
+    min-height: 500px;
+}
+
+.lane-title {
+    font-size: 1.1rem;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border-subtle);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.kitchen-ticket-card {
+    background: var(--bg-card);
+    border-left: 5px solid var(--primary-accent);
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+}
+
+.ticket-header {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+}
+
+.ticket-items-list {
+    font-size: 0.9rem;
+    color: var(--text-main);
+    margin-bottom: 12px;
+    padding-left: 16px;
+}
+
+.ticket-advance-btn {
+    width: 100%;
+    background: var(--secondary-pop);
+    color: #fff;
+    border: none;
+    padding: 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.85rem;
+    transition: background 0.2s ease;
+}
+
+/* STAFF SECURITY MODAL OVERLAYS */
+.auth-modal-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(8px);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.auth-modal-card {
+    background: var(--bg-card);
+    border-radius: 16px;
+    padding: 32px;
+    max-width: 360px;
+    width: 100%;
+    text-align: center;
+}
+
+#staff-pin-input {
+    letter-spacing: 12px;
+    text-align: center;
+    font-size: 1.5rem;
+    padding: 10px;
+    width: 80%;
+    margin: 16px auto;
+    display: block;
+    border-radius: 8px;
+    border: 1px solid var(--text-muted);
+}
+
+.auth-modal-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.auth-cancel-btn, .auth-submit-btn {
+    flex: 1;
+    padding: 10px;
+    border-radius: 6px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: 'Poppins'
+}
+
+.auth-cancel-btn { background: var(--bg-pill-inactive); }
+.auth-submit-btn { background: var(--primary-accent); color: white; }
+.auth-error-text { color: #c0392b; font-size: 0.85rem; height: 16px; font-weight: bold; }
+
+/* VISUAL LIVE STATUS PROGRESS TRACKER */
+.live-tracker-panel {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 16px;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 500px;
+    box-shadow: var(--card-shadow);
+}
+
+.tracker-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.pulse-indicator-dot {
+    width: 10px;
+    height: 10px;
+    background-color: var(--secondary-pop);
+    border-radius: 50%;
+    animation: pulseGlow 1.5s infinite ease-in-out;
+}
+
+@keyframes pulseGlow {
+    0% { transform: scale(0.9); opacity: 0.6; }
+    50% { transform: scale(1.1); opacity: 1; }
+    100% { transform: scale(0.9); opacity: 0.6; }
+}
+
+.tracker-timeline-nodes {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+}
+
+.tracker-timeline-nodes::before {
+    content: '';
+    position: absolute;
+    top: 20px; left: 10%; right: 10%;
+    height: 3px;
+    background: var(--bg-pill-inactive);
+    z-index: 1;
+}
+
+.timeline-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 2;
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: var(--text-muted);
+    width: 30%;
+}
+
+.step-icon-circle {
+    width: 40px;
+    height: 40px;
+    background: var(--bg-pill-inactive);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    margin-bottom: 8px;
+    transition: all 0.4s ease;
+}
+
+.timeline-step.active-step .step-icon-circle {
+    background: var(--primary-accent);
+    color: white;
+    box-shadow: 0 0 12px rgba(107, 20, 38, 0.3);
+}
+
+.timeline-step.active-step span {
+    color: var(--text-main);
+}
+
+.timeline-step.completed-step .step-icon-circle {
+    background: #27ae60;
+    color: white;
+}
+
+.checkout-review-box {
+    background: var(--bg-canvas);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 20px;
+    border: 1px dashed var(--text-muted);
+}
+
+#checkout-summary-items-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#checkout-summary-items-list li {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+    color: var(--text-main);
+}
+
+/* ==========================================================================
+   --- HIGH-GRADE STAFF TERMINAL (POS) DRAWER & KEYPAD STYLES ---
+   ========================================================================== */
+
+/* Full-width fixed bottom portal deck */
+.pos-access-drawer {
+    background: #0f0305; /* Deep luxury wine matching dark core base */
+    border-top: 3px solid var(--secondary-pop); /* Burnt orange highlight strip */
+    padding: 24px 16px;
+    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.8);
+    color: #fcfaf7;
+    font-family: 'Poppins', sans-serif;
+}
+
+#staff-pin-form {
+    max-width: 420px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.pos-terminal-header {
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.pos-terminal-header h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: #fcfaf7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.terminal-alert-text {
+    color: var(--secondary-pop);
+    font-size: 0.75rem;
+    font-weight: bold;
+    min-height: 14px;
+    margin-top: 4px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Input Group Wrappers */
+.pos-input-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.pos-input-wrapper label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-muted);
+}
+
+/* Dropdown Selector */
+#staff-server-name {
+    width: 100%;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    color: #fcfaf7;
+    font-size: 0.95rem;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#staff-server-name:focus {
+    outline: none;
+    border-color: var(--secondary-pop);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+#staff-server-name option {
+    background: #1d070b; /* Keeps dropdown content dark and readable */
+    color: #fcfaf7;
+}
+
+/* Masked Screen Output Field */
+#staff-pin-display {
+    width: 100%;
+    padding: 14px;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(211, 97, 53, 0.2);
+    border-radius: 12px;
+    color: var(--secondary-pop); /* Pin pops in signature orange */
+    font-size: 1.6rem;
+    font-weight: 700;
+    text-align: center;
+    letter-spacing: 6px;
+}
+
+/* 3x4 Keypad Grid Engine */
+.touch-keypad-matrix {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 8px;
+}
+
+/* Master Grid Button baselines */
+.keypad-digit, .keypad-action-clear, .keypad-action-enter {
+    padding: 16px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    border-radius: 12px;
+    cursor: pointer;
+    font-family: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    user-select: none;
+}
+
+/* Standard Digits (0-9) */
+.keypad-digit {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    color: #fcfaf7;
+}
+
+.keypad-digit:active {
+    background: rgba(255, 255, 255, 0.12);
+    transform: scale(0.96);
+}
+
+/* Clear Action Button */
+.keypad-action-clear {
+    background: rgba(107, 20, 38, 0.2);
+    border: 1px solid rgba(107, 20, 38, 0.4);
+    color: #ff4a6b;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.keypad-action-clear:active {
+    background: rgba(107, 20, 38, 0.4);
+    transform: scale(0.96);
+}
+
+/* Enter Submission Button */
+.keypad-action-enter {
+    background: var(--secondary-pop); /* Brand Burnt Orange */
+    border: none;
+    color: #ffffff;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    box-shadow: 0 4px 15px rgba(211, 97, 53, 0.25);
+}
+
+.keypad-action-enter:active {
+    background: #b14d26;
+    transform: scale(0.96);
+    box-shadow: 0 2px 8px rgba(211, 97, 53, 0.15);
+}
+
+/* Responsive adjustment for mobile screen limits */
+@media (max-width: 480px) {
+    .pos-access-drawer {
+        padding: 16px 12px;
+    }
+    .keypad-digit, .keypad-action-clear, .keypad-action-enter {
+        padding: 12px;
+        font-size: 1.1rem;
+    }
+}
+/* Fix for staff terminal view visibility */
+#staff-gate-view.view-section {
+    display: none !important;
+    min-height: 100vh;
+    background: var(--bg-canvas);
+}
+
+#staff-gate-view.view-section.active {
+    display: block !important;
+}
+/* POS Terminal Specific Styles */
+#pos-terminal-view .category-pill {
+    padding: 8px 16px;
+    font-size: 0.8rem;
+    justify-content: center;
+}
+
+#pos-terminal-view .product-item-card {
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+#pos-terminal-view .product-item-card:active {
+    transform: scale(0.98);
+}
+
+/* Desktop POS Grid */
+@media (min-width: 768px) {
+    #pos-grid-container {
+        grid-template-columns: repeat(3, 1fr) !important;
+    }
+}
+/* Fix for POS terminal images */
+#pos-terminal-view .image-wrapper-frame {
+    padding-top: 75% !important;
+    background: var(--bg-pill-inactive);
+}
+
+#pos-terminal-view .image-wrapper-frame img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#pos-terminal-view .product-item-card {
+    cursor: pointer;
+}
+
+#pos-terminal-view .product-item-card:active {
+    transform: scale(0.97);
+}
+/* Force POS view visibility when active */
+#pos-terminal-view.view-section.active {
+    display: block !important;
+}
+
+/* Make sure POS grid items are visible */
+#pos-terminal-view .product-item-card {
+    display: flex !important;
+    flex-direction: column;
+}
+
+#pos-terminal-view .image-wrapper-frame {
+    position: relative;
+    width: 100%;
+    padding-top: 100%;
+    overflow: hidden;
+}
+
+#pos-terminal-view .image-wrapper-frame img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#pos-terminal-view .product-info-block {
+    padding: 12px;
+}
+/* ==========================================================================
+   --- APPRENDED SYSTEM ADAPTIVE POS TERMINAL STYLES & MEDIA QUERIES ---
+   ========================================================================== */
+
+/* Terminal Auth Gate Base Classes Layout */
+.auth-gate-centerpiece-box {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    padding: 30px;
+    border-radius: 20px;
+    width: 100%;
+    max-width: 400px;
+    margin: 40px auto;
+    box-shadow: var(--card-shadow);
+}
+
+.auth-card-top-header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.pin-touch-matrix-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.key-pad-button {
+    background: var(--bg-pill-inactive);
+    border: none;
+    padding: 16px;
+    font-size: 1.25rem;
+    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
+    border-radius: 12px;
+    cursor: pointer;
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s, transform 0.1s;
+}
+
+.key-pad-button:active {
+    background: #e2dacb;
+    transform: scale(0.96);
+}
+
+.key-pad-button.utility-orange-color { background: #fee2e2; color: var(--primary-accent); font-size: 0.85rem; font-weight: 600; }
+.key-pad-button.utility-green-color { background: #d1fae5; color: #059669; }
+
+/* --- CORE POS VIEW CONTAINER LAYOUTS --- */
+.pos-adaptive-split-layout {
+    display: flex;
+    flex-direction: column; /* Adaptive stack by default for phone screens */
+    gap: 20px;
+    min-height: calc(100vh - 140px);
+}
+
+.pos-catalog-panel-workspace {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 16px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.pos-workspace-header-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    border-bottom: 1px solid var(--border-subtle);
+    padding-bottom: 10px;
+}
+
+.pos-server-badge {
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.pos-exit-system-btn {
+    background: var(--primary-accent);
+    color: white;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* POS Internal Fluid Catalog Cards Area Placement */
+.pos-internal-dynamic-catalog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 15px;
+    padding-top: 10px;
+}
+
+.pos-internal-dynamic-catalog-grid .product-item-card p {
+    display: none; /* Strip product descriptions from POS console view to make room on compact viewports */
+}
+
+/* Right-Hand Core Ticket Pane Sidebar Blueprint */
+.pos-ticket-receipt-pane-sidebar {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--card-shadow);
+    overflow: hidden;
+}
+
+.pos-receipt-title-banner {
+    background: var(--primary-accent);
+    color: white;
+    padding: 15px;
+    text-align: center;
+}
+
+.pos-scrollable-receipt-items-body {
+    padding: 15px;
+    min-height: 180px;
+    max-height: 350px;
+    overflow-y: auto;
+}
+
+.pos-receipt-totals-aggregation-footer {
+    background: var(--bg-pill-inactive);
+    padding: 15px;
+    border-top: 1px solid var(--border-subtle);
+}
+
+.pos-footer-action-buttons-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.pos-footer-action-trigger {
+    border: none;
+    padding: 12px;
+    border-radius: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-size: 0.9rem;
+}
+
+.pos-footer-action-trigger.pos-danger-clear-btn { background: #ffe4e6; color: #e11d48; }
+.pos-footer-action-trigger.pos-success-send-btn { background: #d1fae5; color: #059669; }
+
+/* --- FORCE POS OVERRIDE DISPLAY ENGINE --- */
+#pos-terminal-view.view-section.active {
+    display: block !important;
+}
+
+/* ==========================================================================
+   --- DEVICE RESPONSIVENESS MEDIA QUERY BREAKPOINTS MATRIX ---
+   ========================================================================== */
+
+/* 1. Phone Viewports (Up to 767px) */
+@media (max-width: 767px) {
+    .pos-internal-dynamic-catalog-grid {
+        grid-template-columns: repeat(2, 1fr) !important; /* FIXED: Now correctly forces a clean 2-column layout on phone screens */
+    }
+}
+
+/* 2. Custom Target Bracket: iPads Portrait Mode (768px to 1031px) */
+@media (min-width: 768px) and (max-width: 1031px) {
+    .pos-internal-dynamic-catalog-grid {
+        grid-template-columns: repeat(3, 1fr) !important; /* FIXED: Correctly steps up layout grid smoothly to 3 balanced panels */
+    }
+    .pos-scrollable-receipt-items-body {
+        max-height: 400px;
+    }
+}
+
+/* 3. The Modern iPad Landscape Breakthrough Boundary Line (1032px and Up) */
+@media (min-width: 1032px) {
+    .pos-adaptive-split-layout {
+        flex-direction: row; /* Unlocks split-screen layout framework side-by-side */
+    }
+    
+    .pos-catalog-panel-workspace {
+        flex: 1;
+        height: calc(100vh - 160px);
+        overflow-y: auto;
+    }
+    
+    .pos-ticket-receipt-pane-sidebar {
+        width: 380px;
+        height: calc(100vh - 160px);
+        position: sticky;
+        top: 20px;
+    }
+    
+    .pos-scrollable-receipt-items-body {
+        flex: 1; /* Maximizes body expansion to push calculations footer down seamlessly */
+        max-height: none;
+    }
+    
+    .pos-internal-dynamic-catalog-grid {
+        grid-template-columns: repeat(3, 1fr) !important; /* Locks landscape desktop layout item grid engine */
+    }
+}
+/* --- KITCHEN PIPELINE UTILITIES MONITOR STYLING --- */
+.kitchen-dashboard-wrapper { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 20px; 
+}
+
+.kitchen-dashboard-header-bar { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    flex-wrap: wrap; 
+    gap: 15px; 
+}
+
+.kitchen-metric-counters-group { 
+    display: flex; 
+    align-items: center; 
+    gap: 10px; 
+}
+
+.kitchen-metric-badge { 
+    padding: 6px 12px; 
+    border-radius: 6px; 
+    font-weight: 600; 
+    font-size: 0.85rem; 
+}
+
+.kitchen-metric-badge.prep-color { 
+    background: #fef3c7; 
+    color: #b45309; 
+}
+
+.kitchen-metric-badge.cooking-color { 
+    background: #e0f2fe; 
+    color: #0369a1; 
+}
+
+.kitchen-lanes-board-grid-matrix { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+    gap: 20px; 
+}
+
+.kitchen-lane-column-node { 
+    background: var(--bg-card); 
+    border: 1px solid var(--border-subtle); 
+    border-radius: 14px; 
+    overflow: hidden; 
+}
+
+.lane-title-header { 
+    padding: 12px; 
+    color: white; 
+    font-weight: bold; 
+    text-align: center; 
+}
+
+.lane-title-header.orange-lane-bg { 
+    background: #b45309; 
+}
+
+.lane-title-header.blue-lane-bg { 
+    background: #0369a1; 
+}
+
+.lane-vertical-cards-stack-scroller { 
+    padding: 15px; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 15px; 
+    max-height: 60vh; 
+    overflow-y: auto; 
+}
+
+/* ==========================================================================
+   --- KITCHEN RESPONSIVE MATRIX EXTENSIONS ---
+   ========================================================================== */
+
+/* 1. Phone Viewports (Up to 767px) */
+@media (max-width: 767px) {
+    .kitchen-lanes-board-grid-matrix { 
+        grid-template-columns: 1fr !important; /* Stack columns completely flat on mobile phones */
+    }
+    .kitchen-dashboard-header-bar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .pipeline-node-lane {
+        min-height: 300px;
+    }
+}
+
+/* 2. iPads Portrait Mode (768px to 1031px) */
+@media (min-width: 768px) and (max-width: 1031px) {
+    .kitchen-lanes-board-grid-matrix { 
+        grid-template-columns: repeat(1, 1fr) !important; /* Balanced dual-column lane split for tablet screens */
+    }
+    .pipeline-node-lane {
+        min-height: 400px;
+    }
+}
+
+/* ==========================================================================
+   --- PRIVATE ADMINISTRATIVE FLOATING CONTROL HUB SWITCH PANEL ---
+   ========================================================================== */
+.admin-floating-switch-bar-wrapper {
+    position: fixed;
+    bottom: 85px; /* Floats safely right above your mobile footer navigation row */
+    left: 50%;
+    transform: translateX(-50%);
+    background: #0f172a;
+    border: 2px solid var(--secondary-pop);
+    border-radius: 50px;
+    padding: 10px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    z-index: 1000;
+    width: auto;
+    min-width: 580px;
+    animation: slideUpFloatingPanel 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes slideUpFloatingPanel {
+    from { opacity: 0; transform: translate(-50%, 30px); }
+    to { opacity: 1; transform: translate(-50%, 0); }
+}
+
+.admin-panel-toggle-btn {
+    border: none;
+    padding: 8px 18px;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    background: rgba(255, 255, 255, 0.08);
+    color: #94a3b8;
+}
+
+.admin-panel-toggle-btn:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.admin-panel-toggle-btn.active-state {
+    background: var(--secondary-pop) !important;
+    color: white !important;
+    box-shadow: 0 2px 8px rgba(211, 97, 53, 0.4);
+}
+
+@media (max-width: 767px) {
+    .admin-floating-switch-bar-wrapper {
+        width: 90%;
+        min-width: unset;
+        flex-direction: column;
+        gap: 12px;
+        border-radius: 16px;
+        bottom: 90px;
+        padding: 12px;
+    }
+}
