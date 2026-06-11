@@ -8,3 +8,15 @@ The architecture isolates all essential restaurant workflows across three unifie
 **Staff POS Terminal:** A secure operator workspace accessed via an on-screen client-side numeric keypad grid. It validates input parameters against local master credentials to update order statuses and manage active internal billing tickets.
 
 **Admin Dashboard:** Features a dynamic Kanban kitchen pipeline moving orders across live operational swimlanes, real-time localized sales volume analytics, and a brand customization sandbox running an accessibility-focused relative perceived luminance contrast algorithm.
+
+## 🚀 Key Features
+- **Dynamic Customer Portal:** Automated table tracking utilizing native URL parameter parsing (`URLSearchParams`), complete with live checkout cart calculation loops.
+- **Secure Staff POS Terminal:** Client-side operator credential validation driven by an event-mapped numeric keypad grid.
+- **Admin Management Canvas:** Real-time Kanban kitchen swimlane display alongside a dynamic brand customizer that calculates relative perceived luminance to adjust typographical contrast.
+
+## 🛠️ Technical Stack
+- **Structure & Layout:** Semantic HTML5
+- **Presentation Layer:** CSS3 (Mobile-first design featuring Glassmorphism UI tokens)
+- **Application Logic:** Vanilla JavaScript (ES6+ Monolithic State Controller)
+- **Data Persistence:** Web Storage API (`localStorage` parsing & serialization arrays)
+- **Vector Assets:** Font Awesome 6.0 CDN
